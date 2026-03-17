@@ -7,7 +7,6 @@ import userProductRoute from './routes/products.route.js';
 import adminProductRouter from './routes/admin/product.route.js';
 import adminOrderRouter from './routes/admin/orders.route.js';
 import userOrderRouter from './routes/orders.routes.js';
-import { reqRateLimit } from './middlewares/rateLimit.js';
 import { authUnifiedMiddleware } from './middlewares/authUnified.middleware.js';
 
 const app = express();
@@ -27,8 +26,6 @@ app.use((req, res, next) => {
   console.log(`[${now}] ${req.method} ${req.url}`);
   next();
 });
-
-app.use(reqRateLimit);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello from backend API!');
