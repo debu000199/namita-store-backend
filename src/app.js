@@ -8,6 +8,7 @@ import adminProductRouter from './routes/admin/product.route.js';
 import adminOrderRouter from './routes/admin/orders.route.js';
 import userOrderRouter from './routes/orders.routes.js';
 import { authUnifiedMiddleware } from './middlewares/authUnified.middleware.js';
+import { analyticsMiddleware } from './middlewares/analytics.middleware.js';
 
 const app = express();
 
@@ -20,6 +21,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Vercel Analytics middleware for tracking API requests
+app.use(analyticsMiddleware);
 
 app.use((req, res, next) => {
   const now = new Date().toISOString();
