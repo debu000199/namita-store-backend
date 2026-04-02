@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:8080', 'https://eplatform-app.vercel.app', '*'],
+    origin: ['http://localhost:8080', 'https://eshop.devsubhadipbag.in', '*'],
     credentials: true,
   }),
 );
