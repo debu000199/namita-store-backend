@@ -31,9 +31,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello from backend API!');
-});
+// app.get('/', (req, res) => {
+//   res.status(200).send('Hello from backend API!');
+// });
 
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -47,7 +47,7 @@ app.get('/api', (req, res) => {
   res.status(200).json({ message: 'Backend API is running!' });
 });
 
-app.get('/test', async (req, res) => {
+app.get('/', async (req, res) => {
   const jobs = [];
 
   for (let i = 0; i < 200000000000000; i++) {
