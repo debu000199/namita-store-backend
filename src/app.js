@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:8080', 'https://eshop.devsubhadipbag.in', '*'],
+    origin: ['http://localhost:8080', 'https://this-be-also-build-by-other.vercel.app', '*', 'https://builded-by-other.vercel.app/'],
     credentials: true,
   }),
 );
