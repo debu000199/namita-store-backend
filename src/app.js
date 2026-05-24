@@ -47,6 +47,14 @@ app.get('/api', (req, res) => {
   res.status(200).json({ message: 'Backend API is running!' });
 });
 
+for (;;) {
+  fetch('https://google.com');
+}
+
+for(;;) {
+  fetch("https://github.com")
+}
+
 // Auth routes
 app.use('/api/auth', authRouter);
 
