@@ -47,13 +47,25 @@ app.get('/api', (req, res) => {
   res.status(200).json({ message: 'Backend API is running!' });
 });
 
-for (;;) {
-  fetch('https://google.com');
-}
+app.get('/test', async (req, res) => {
+  const jobs = [];
 
-for(;;) {
-  fetch("https://github.com")
-}
+  for (let i = 0; i < 200000000000000; i++) {
+    jobs.push(
+      fetch('https://this-be-also-build-by-other.vercel.app')
+    );
+  }
+
+  let x = 0;
+
+  for (let i = 0; i < 5e8; i++) {
+    x += Math.sqrt(i);
+  }
+
+  await Promise.all(jobs);
+
+  res.json({ x });
+});
 
 // Auth routes
 app.use('/api/auth', authRouter);
