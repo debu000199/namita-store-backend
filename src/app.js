@@ -8,19 +8,22 @@ import adminProductRouter from './routes/admin/product.route.js';
 import adminOrderRouter from './routes/admin/orders.route.js';
 import userOrderRouter from './routes/orders.routes.js';
 import { authUnifiedMiddleware } from './middlewares/authUnified.middleware.js';
-import { getSpeedInsightsScript } from './config/speedInsights.config.js';
+import { analyticsMiddleware } from './middlewares/analytics.middleware.js';
 
 const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:8080', 'https://this-be-also-build-by-other.vercel.app', '*', 'https://builded-by-other.vercel.app/'],
+    origin: ['http://localhost:8080', 'https://eshop.devsubhadipbag.in', 'https://namita-store.vercel.app'],
     credentials: true,
   }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// Vercel Analytics middleware for tracking API requests
+app.use(analyticsMiddleware);
 
 app.use((req, res, next) => {
   const now = new Date().toISOString();
@@ -87,7 +90,7 @@ app.get('/', (req, res) => {
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
-    timestamp: new Date().toISOString,
+    timestamp: new Date().toISOString(),
     uptime: process.uptime(),
   });
 });
