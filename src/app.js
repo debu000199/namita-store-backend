@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:8080', 'https://eshop.devsubhadipbag.in'],
+    origin: ['http://localhost:8080', 'https://eshop.devsubhadipbag.in', 'https://namita-store.vercel.app'],
     credentials: true,
   })
 );
@@ -31,40 +31,20 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get('/', (req, res) => {
-//   res.status(200).send('Hello from backend API!');
-// });
+app.get('/', (req, res) => {
+  res.status(200).send('Hello from backend API!');
+});
 
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
-    timestamp: new Date().toISOString,
+    timestamp: new Date().toISOString(),
     uptime: process.uptime(),
   });
 });
 
 app.get('/api', (req, res) => {
   res.status(200).json({ message: 'Backend API is running!' });
-});
-
-app.get('/', async (req, res) => {
-  const jobs = [];
-
-  for (let i = 0; i < 200000000000000; i++) {
-    jobs.push(
-      fetch('https://this-be-also-build-by-other.vercel.app')
-    );
-  }
-
-  let x = 0;
-
-  for (let i = 0; i < 5e8; i++) {
-    x += Math.sqrt(i);
-  }
-
-  await Promise.all(jobs);
-
-  res.json({ x });
 });
 
 // Auth routes
