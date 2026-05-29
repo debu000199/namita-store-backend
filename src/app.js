@@ -16,7 +16,7 @@ app.use(
   cors({
     origin: ['http://localhost:8080', 'https://eshop.devsubhadipbag.in', 'https://namita-store.vercel.app'],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,7 +32,59 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello from backend API!');
+  // Serve HTML page with Speed Insights integration
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Namita Store Backend API</title>
+      ${getSpeedInsightsScript()}
+      <style>
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          margin: 0;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+        }
+        .container {
+          text-align: center;
+          padding: 2rem;
+        }
+        h1 {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+        }
+        p {
+          font-size: 1.2rem;
+          opacity: 0.9;
+        }
+        .status {
+          background: rgba(255, 255, 255, 0.2);
+          padding: 1rem 2rem;
+          border-radius: 8px;
+          margin-top: 2rem;
+          display: inline-block;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>🚀 Namita Store Backend API</h1>
+        <p>Welcome to the backend API server</p>
+        <div class="status">
+          <strong>Status:</strong> Running ✅
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  res.status(200).send(html);
 });
 
 app.get('/health', (req, res) => {
